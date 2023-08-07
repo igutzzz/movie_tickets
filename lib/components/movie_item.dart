@@ -21,38 +21,29 @@ class MovieItem extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Container(
-        width: 185,
-        padding: const EdgeInsets.all(10),
-        height: 300,
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.grey[900],
+        ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(5),
               child: Image.network(
                 'https://image.tmdb.org/t/p/original/$poster',
                 height: 250,
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 5),
-              padding: const EdgeInsets.only(left: 3, right: 3),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(title, style: GoogleFonts.inter(
-                    fontWeight: FontWeight.bold
-                  ),),
-                  Row(
-                    children: [
-                      const Icon(Icons.star_half_outlined),
-                      Text(rating.toStringAsFixed(2), style: GoogleFonts.inter(),)
-                    ],
-                  )
-                ],
+              margin: const EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(left: 5, right: 5),
+              child:Text(title, style: GoogleFonts.inter(
+                fontWeight: FontWeight.bold
+              ),)
               ),
-            )
           ],
         ),
       ),
