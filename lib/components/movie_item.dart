@@ -7,45 +7,67 @@ class MovieItem extends StatelessWidget {
   final String overview;
   final String poster;
   final double rating;
+  final List<String> genres;
 
-  const MovieItem(
-      {super.key,
-      required this.id,
-      required this.title,
-      required this.overview,
-      required this.poster,
-      required this.rating,});
+  const MovieItem({
+    super.key,
+    required this.id,
+    required this.title,
+    required this.overview,
+    required this.poster,
+    required this.rating,
+    required this.genres,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.ltr,
-      child: Container(
-        padding: const EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.grey[900],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(5),
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          FittedBox(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(7),
               child: Image.network(
                 'https://image.tmdb.org/t/p/original/$poster',
-                height: 250,
+                height: 150,
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              padding: const EdgeInsets.only(left: 5, right: 5),
-              child:Text(title, style: GoogleFonts.inter(
-                fontWeight: FontWeight.bold
-              ),)
-              ),
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 15.0, left: 15.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 350,
+                  child: Text(
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: true,
+                    title,
+                    style: GoogleFonts.inter(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 5),
+                  child: Row(
+                    children: [
+                      for (var item in genres) Text(
+                      genres.indexOf(item) == genres.indexOf(genres.last) ? item : "$item / ",
+                      style: GoogleFonts.inter(
+                        fontWeight: FontWeight.w300,
+                        fontSize: 12.0
+                      ),
+                    )],
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
